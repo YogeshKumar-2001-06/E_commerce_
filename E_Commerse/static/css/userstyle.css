@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+}
+
+.header {
+    background-color: #1a73e8;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+    
+.profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+    width: 30%;
+    background-color: #f9fbfd;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.sidebar h3 {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.sidebar p {
+    text-align: center;
+    color: gray;
+    font-size: 14px;
+}
+
+.sidebar .stats {
+    margin-top: 20px;
+}
+
+.stats p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.main-content {
+    width: 70%;
+    padding: 20px;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+    border-bottom: 3px solid transparent;
+}
+
+.tab.active {
+    font-weight: bold;
+    color: #1a73e8;
+    border-bottom: 3px solid #1a73e8;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.form input,
+.form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form button {
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: #1668c1;
+}
+
+.order-summary {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f9fbfd;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.order-summary div {
+    text-align: center;
+}
+
+.order-summary div h4 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.order-summary div p {
+    margin: 5px 0 0;
+    color: gray;
+    font-size: 14px;
+}
+
+.details-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9fbfd;
+    border-radius: 8px;
+}
+
+.details-section h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.details-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.details-section ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.details-section ul li:last-child {
+    border-bottom: none;
+}

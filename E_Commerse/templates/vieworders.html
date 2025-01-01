@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/userstyle.css' %}"><!-- Link to your external CSS file -->
+    <style>
+        .details-section {
+            padding: 20px;
+            max-width: 800px;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+
+        }
+        
+        .details-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.5em;
+            text-align: center;
+            border-bottom: 2px solid #1a73e8;
+            padding-bottom: 5px;
+        }
+
+        .items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin:10px;
+        }
+
+        .items:hover {
+            transform: translateY(-5px);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* Image styling */
+        .item-img img.product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* Item details styling */
+        .item-details h2 {
+            font-size: 1.2em;
+            margin: 10px;
+            color: #333;
+        }
+
+        .item-details p {
+            margin: 10px;
+
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Item price styling */
+        .item-price h2 {
+            color: green;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        /* Status container styling */
+        .item-status {
+            margin: 10px;
+            font-size: 1em;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .items {
+                width: calc(50% - 20px); /* Two items per row for tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .items {
+                width: 100%; /* One item per row for mobile */
+            }
+        }
+
+        
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="details-section">
+        <h3>Orders</h3>
+        {% if orders %}
+        {% for order in orders %}
+            <div class="order-items">
+                {% for item in order.items.all %}
+                    <div class="items">
+                        <div class="item-img">
+                            <img src="{{ item.product.Image.url }}" alt="{{ item.product.Name }}" class="product-image">
+                        </div> 
+                        <div class='item-details'>
+                            <h2><strong>{{ item.product.Name }}</strong></h2>
+                            <p>Qty : {{ item.quantity }}</p>
+                        </div> 
+                        <div class="item-price">
+                            <h2 style='color:green'>${{ item.price }}<h2>
+                        </div>
+                        <div item="status">
+                            <p>Your item has been {{order.status}}</p><br><br>
+                            <p>Delivery date {{order.delivery_date}}</p>
+                        </div>                                           
+                    </div>  
+                    
+                {% endfor %}
+            
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>You have no orders yet.</p>
+    {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}
+

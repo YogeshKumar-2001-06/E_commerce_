@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Home - My website{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Product Title Styling */
+.product-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+/* Product Controls Container */
+.product-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Count Styling */
+.product-count {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Sort By Container Styling */
+.sort-by {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Sort By Dropdown Styling */
+.sort-by select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.sort-by select:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .product-count,
+    .sort-by {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .sort-by select {
+        width: 100%;
+        font-size: 14px;
+    }
+}
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1 class="product-title">New Arrivals</h1>
+    <div class="product-controls">
+        <div class="product-count">Number of Products:{{product_count}}</div>
+        <div class="sort-by">
+            Sort by: 
+            <select>
+                <option value="popularity">Popularity</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="newest">Newest</option>
+            </select>
+        </div>
+    </div>
+    <!-- Our Products Section -->
+    <section id="our-products">
+        <h2>Our Products</h2>
+        <p>Hand-picked toys just for you!</p>
+        <div class="product-list">
+            <!-- Featured products can be displayed here -->
+            {% for product in product %}
+                <div class="product-item">
+                    <a href="{% url 'product' product.ID %}">
+                        <img src="{{product.Image.url}}" alt="Featured Toy 1">
+                        <h3>{{product.Name}}</h3>
+                        <div class="priceinfo">
+                            <span class="current-price">{{product.Discount_Price}}</span>
+                            <span class="original-price">{{product.Price}}</span>
+                            <span class="discount">82% off</span>
+                        </div>
+                        <div class="buttons">
+                            <form action="{% url 'add_cart' product.ID%}" method="POST">
+                                {% csrf_token %}
+                                <button>ADD Cart</button>
+                            </form>
+                            <button>Buy Now</button>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
+{% block script %}
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Home - My website{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/mainstyle.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+
+{% endblock %}
+
+{% block content %}
+    <!-- Advertisement Section -->
+    <div id="notification" style="display: none; background: #d4edda; padding: 10px; margin: 10px 0; border: 1px solid #c3e6cb; color: #155724;">
+    </div>
+    
+    {% for add in Advertisement %}
+        
+        <a href="{% url 'product' add.ID %}">
+            <section id="advertisement" style="background-image: url('{{ add.image.url }}');">
+            </section>
+        </a>
+        
+    {% endfor %}
+    
+
+    <!-- Shop By Category Section -->
+    <section id="shop-by-category" class="shop-by-category">
+        <h2>Shop By Category</h2>
+        <div class="category-list">
+            {% for category in Category %}
+            <div class="item">
+                <a href="{% url 'categorysearch' category.ID %}">
+                    <div class="category-item">
+                        <img src="{{ category.image.url }}" alt="{{ category.Name }}">
+                        <h3>{{ category.Name }}</h3>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    
+
+    <!-- New Arrivals Section -->
+    <section id="new-arrivals">
+        <h2>New Arrivals</h2>
+        <div class="product-list">
+            <!-- New toys/products can be displayed here -->
+            {% for new in NewProduct %}
+            <div class="product-item">
+                <a href="{% url 'product' new.ID %}">
+                    <img src="{{new.Image.url}}" alt="Featured Toy 1">
+                    <h3>{{new.Name}}</h3>
+                    <div class="priceinfo">
+                        <span class="current-price">₹{{new.Discount_Price}}</span>
+                        <span class="original-price">₹{{new.Price}}</span><br><br>
+                        <p>
+                            <span class="discount">{{new.Discount_percentage|floatformat:0}} % off</span>
+                        </p>
+                    </div>
+                    <div class="buttons">
+                        <form action="{% url 'add_cart' new.ID %}" method="POST">
+                            {% csrf_token %}
+                            <button class="add-cart-btn">Add to Cart ♥</button>
+                        </form>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Our Products Section -->
+    <section id="our-products">
+        <h2>Our Products</h2>
+        <p>Hand-picked toys just for you!</p>
+        <div class="product-list">
+            <!-- Featured products can be displayed here -->
+            {% for product in Products %}
+                <div class="product-item">
+                    <a href="{% url 'product' product.ID %}">
+                        <img src="{{product.Image.url}}" alt="Featured Toy 1">
+                        <h3>{{product.Name}}</h3>
+                        <div class="priceinfo">
+                            <span class="current-price">₹{{product.Discount_Price}}</span>
+                            <span class="original-price">₹{{product.Price}}</span>
+                            <p>
+                                <span class="discount" style="left:0;">{{product.Discount_percentage|floatformat:0}} % off</span>
+                            </p>                        </div>
+                        <div class="buttons">
+                            <form action="{% url 'add_cart' product.ID%}" method="POST">
+                                {% csrf_token %}
+                                <button>ADD Cart ♥</button>
+                            </form>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <h1>{{product_discounts}}<h2>
+    </section>
+
+{% endblock %}
+{% block script %}
+    
+{% endblock %}

@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/basestyle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    {% block style %}{% endblock %}
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <a href="{% url 'home' %}">
+                <div>
+                    <img src="{% static 'logo/logo.jpeg' %}" alt="Toy Shop Logo"> <!-- Logo Image -->
+                </div>
+                <div>
+                    <h5>Welcome, <br></h5>
+                    <h2 style="padding-left:10px;">{% if request.user.is_authenticated %}Mr. {{ request.user.username }}{% else %}Guest{% endif %}</h2> <!-- User Greeting -->
+                </div>
+            </a>
+        </div>
+        <div class="search-bar">
+            <form method="GET" action="{% url 'productsearch' %}">
+                <input type="text" name="query" placeholder="Search for products..." value="{{ request.GET.query }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <!-- Header Icons -->
+        <div class="header-icons">
+            <div class="user-profile" style="margin:10px">
+                <a onclick="toggleCart()" href="{% url 'profile' %}">
+                    <i style=" font-size: 30px; color: white;" class="fa-solid fa-user"></i>
+                </a>
+            </div>
+            <div class="cart" onclick="openCart()" style="margin:10px">
+                <a href="#">
+                    <i style=" font-size: 30px; color: white;" class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- Cart Slide Bar -->
+    <!-- Cart Sidebar -->
+    <div id="cart-slidebar" class="cart-slidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <span class="close-cart" onclick="closeCart()">&times;</span> <!-- Close Icon -->
+        </div>
+
+        <div id="cart-items-container">
+            {% if cartitems and cartitems.items.exists %}
+                {% for item in cartitems.items.all %}
+                <div class="cart-item">
+                    <img src="{{ item.Product.Image.url }}" alt="{{ item.Product.Name }}">
+                    <div class="cart-item-details">
+                        <p class="cart-item-name">{{ item.Product.Name }}</p>
+                        <p class="cart-item-price">${{ item.Product.Price }}</p>
+
+                        <input type="number" class="cart-item-quantity" value="{{ item.Quantity }}" min="1">
+                        <form method="POST" action="{% url 'remove_item' item.ID %}">
+                            {% csrf_token %}
+                            <button type="submit" class="remove-item" >Remove</button>
+                        </form>
+                        <button class="buy-now">Buy Now</button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="cart-item">
+                    <p>Your Cart is Empty</p>
+                </div>
+            {% endif %}
+        </div>
+        
+    </div>
+    <!-- Navbar Section -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li onclick="toggleCategories()"><a href="#">Categories</a></li>
+            <li><a href="{% url 'productlist' %}">New Arrivals</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+    <div id="category-items" class="category-items" style="display: none;">
+        {% for category in Category %}
+        <a href="{% url 'categorysearch' category.ID %}">
+            <h3>{{ category.Name }}</h3>
+        </a>
+        {% empty %}
+            <p>No categories available.</p>
+        {% endfor %}
+    </div>
+    <!-- Main Body Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Toy Shop. All rights reserved.</p>
+    </footer>
+    <script src="{% static 'js/base.js' %}"></script>
+
+    {% block script %}
+        <!-- JavaScript -->
+    {% endblock %}
+    
+</body>
+</html>

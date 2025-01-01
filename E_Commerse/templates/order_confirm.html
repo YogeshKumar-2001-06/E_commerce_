@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .order-summary {
+            margin-top: 20px;
+        }
+        .order-summary h2 {
+            margin-bottom: 10px;
+        }
+        .order-item {
+            display:flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        img{
+            height:200px;
+            width:200px;
+            
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        .product-name {
+            font-weight: bold;
+        }
+        .product-stock {
+            color: #888;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+        .btn-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Confirmation</h1>
+        <p>Thank you for your order!</p>
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="order-item">
+                <div>
+                    <img src="{{ product.Image.url }}">
+                </div>
+                <div>
+                    <p class="product-name">{{ item.product.Name }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>Price: ${{ item.product.Discount_Price }}</p>
+                </div>
+            </div>
+        </div>
+        <p><strong>Total Amount:</strong> ${{ order.total_amount }}</p>
+        <p>Order ID: TOY#{{ order.order_id}}</p>
+        <p>Expected Delivery : {{order.delivery_date}}</p>
+        <p>We will notify you once your order is shipped!</p>
+        <div class="btn-container">
+            <a href="{% url 'home' %}" class="btn">Continue Shopping</a>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Your Toy Shop. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Home - My website{%endblock %} 
+{% block style %}
+    <style>
+        /* Container Styling */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        /* Main Content Styling */
+        .main-content h2 {
+            color: #0056b3;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 5px;
+        }
+
+        .main-content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* List Styling */
+        .main-content ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .main-content ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .main-content ul li::before {
+            content: '✓';
+            color: #0056b3;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Team Member Styling */
+        .team-member {
+            background-color: #e6f2ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member h3 {
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+
+        .team-member p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Contact Information Styling */
+        .main-content p:last-of-type {
+            font-weight: bold;
+            color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .main-content h2 {
+                font-size: 18px;
+            }
+
+            .main-content p,
+            .team-member p {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+{% endblock %} 
+{% block content %}
+
+    <div class="container">
+        <div class="main-content">
+            <h2>Welcome to Toy Wonderland</h2>
+            <p>
+                At Toy Wonderland, we believe that every child deserves to experience the
+                magic and joy that comes with playing with toys. Founded in 2005, our
+                mission is to provide a wide range of high-quality, safe, and affordable
+                toys that inspire creativity and learning in children of all ages.
+            </p>
+            <h2>Our Story</h2>
+            <p>
+                Our journey began with a small toy shop in the heart of the city. Over the
+                years, we have grown into a beloved destination for families, offering an
+                extensive collection of toys, games, and educational products. From
+                classic wooden toys to the latest tech gadgets, we have something for
+                every child.
+            </p>
+            <h2>Why Choose Us?</h2>
+            <ul>
+                <li>
+                    <strong>Quality and Safety:</strong> We prioritize the safety and
+                        well-being of children by ensuring that all our toys meet stringent
+                        safety standards.
+                </li>
+                <li>
+                    <strong>Wide Selection:</strong> With over 10,000 products, we offer a
+                        diverse range of toys to suit different interests and age groups.
+                </li>
+                <li>
+                    <strong>Exceptional Customer Service:</strong> Our friendly and
+                        knowledgeable staff are always ready to assist you in finding the
+                        perfect toy for your child.
+                </li>
+                <li>
+                    <strong>Community Focus:</strong> We believe in giving back to our
+                        community and regularly participate in local events and charitable
+                        initiatives.
+                </li>
+            </ul>
+            <h2>Meet Our Team</h2>
+            <div class="team-member">
+                <h3>Jane Doe - Founder & CEO</h3>
+                <p>
+                    Jane started Toy Wonderland with a passion for toys and a dream to
+                    create a magical space where children can explore and discover.
+                </p>
+            </div>
+            <div class="team-member">
+                <h3>John Smith - Operations Manager</h3>
+                <p>
+                    John ensures that our operations run smoothly, from inventory management
+                    to customer service, making sure every visit is a delightful experience.
+                </p>
+            </div>
+            <h2>Contact Us</h2>
+            <p>
+                If you have any questions or need assistance, feel free to reach out to us
+                at:
+            </p>
+            <p>Email: support@toywonderland.com</p>
+            <p>Phone: +1 234 567 890</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script%}
+{% endblock %}

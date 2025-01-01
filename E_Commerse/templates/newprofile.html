@@ -1,0 +1,401 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/userstyle.css' %}"><!-- Link to your external CSS file -->
+    <style>
+        .details-section {
+            padding: 20px;
+            max-width: 700px;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+        
+        .details-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.5em;
+            text-align: center;
+            border-bottom: 2px solid #1a73e8;
+            padding-bottom: 5px;
+        }
+
+        /* Individual cart item styling */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #ffffff; /* White background */
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-3px); /* Lift effect */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+        }
+
+        /* Image styling */
+        .cart-item img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0; /* Subtle border around image */
+        }
+
+        /* Cart item details styling */
+        .cart-item-details {
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        /* Cart item name */
+        .cart-item-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333; /* Deep gray */
+            margin-bottom: 8px;
+        }
+
+        /* Cart item price */
+        .cart-item-price {
+            font-size: 16px;
+            color: #ff6f61; /* Vibrant red-orange */
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        /* Quantity input */
+        .cart-item-quantity {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+        /* Button styling */
+        .cart-item button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Remove button */
+        .remove-item {
+            background-color: #ff4d4d; /* Bright red */
+            color: #ffffff; /* White text */
+            margin-right: 10px;
+        }
+
+        .remove-item:hover {
+            background-color: #e60000; /* Darker red */
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Buy Now button */
+        .buy-now {
+            background-color: #28a745; /* Vibrant green */
+            color: #ffffff; /* White text */
+        }
+
+        .buy-now:hover {
+            background-color: #218838; /* Darker green */
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Empty cart message */
+        #cart-items-container .cart-item p {
+            text-align: center;
+            color: #6c757d; /* Neutral gray */
+            font-size: 18px;
+            font-weight: bold;
+            margin: 25px 0;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cart-item img {
+                margin-bottom: 15px;
+            }
+
+            .cart-item-details {
+                margin-left: 0;
+            }
+
+            .cart-item button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+
+        
+        .address {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .address span {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        
+        .address span:last-child {
+            margin-bottom: 0;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        #add-address-btn {
+            display: block;
+            margin: 0 auto;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #add-address-btn:hover {
+            background-color: #155db2;
+        }
+        a{
+            text-decoration:none;
+        }
+    
+        .order-items{
+            width:90%;
+        }
+
+        .items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin:10px;
+        }
+
+        .items:hover {
+            transform: translateY(-5px);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* Image styling */
+        .item-img img.product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* Item details styling */
+        .item-details h2 {
+            font-size: 1.2em;
+            margin: 10px;
+            color: #333;
+        }
+
+        .item-details p {
+            margin: 10px;
+
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Item price styling */
+        .item-price h2 {
+            color: green;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        /* Status container styling */
+        .item-status {
+            margin: 10px;
+            font-size: 1em;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .items {
+                width: calc(50% - 20px); /* Two items per row for tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .items {
+                width: 100%; /* One item per row for mobile */
+            }
+        }
+
+        
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="profile-container">
+        <div class="sidebar">
+            <img src="{% static 'logo/user.png' %}" alt="Profile Picture">
+            <h3>{{ profile.user }}</h3>
+            <p>{{ profile.Email }}</p>
+            
+            
+
+            <div class="stats">
+                <p>Orders: <strong>{{ orders_count }}</strong></p>
+                <p>Pending Orders: <strong>{{ pending }}</strong></p>
+                <p>Delivered Orders: <strong>{{ delivered }}</strong></p>
+            </div>
+            <a href="{% url 'vieworders' %}">
+                <button style="width: 100%; padding: 10px; margin-top: 10px; background-color: #1a73e8; color: white; border: none; border-radius: 5px;">View Order History</button>
+            </a>
+        </div>
+
+        <div class="main-content">
+            <div class="tabs">
+                <div class="tab active">Account Settings</div>
+                <div class="tab">Orders</div>
+                <div class="tab">Wishlist</div>
+                <div class="tab">Addresses</div>
+            </div>
+            
+            <div class="details-section">
+                <h3>Account Settings</h3>
+                <form class="form">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" />
+                    <button type="submit">Update Profile</button>
+                </form>
+                
+        
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}  <!-- This renders the form fields automatically -->
+                    <button type="submit">Update Profile</button>
+                </form>
+            </div>
+            
+            <div class="details-section">
+                <h3>Orders</h3>
+                {% if orders %}
+                {% for order in orders %}
+                    <div class="order-items">
+                        {% for item in order.items.all %}
+                            <div class="items">
+                                <div class="item-img">
+                                    <img src="{{ item.product.Image.url }}" alt="{{ item.product.Name }}" class="product-image">
+                                </div> 
+                                <div class='item-details'>
+                                    <h2><strong>{{ item.product.Name }}</strong></h2>
+                                    <p>Qty : {{ item.quantity }}</p>
+                                </div> 
+                                <div class="item-price">
+                                    <h2 style='color:green'>${{ item.price }}<h2>
+                                </div>
+                                <div item="status">
+                                    <p>Your item has been {{order.status}}</p><br><br>
+                                    <p>Delivery date {{order.delivery_date}}</p>                                    
+                                </div>                                           
+                            </div>  
+                            
+                        {% endfor %}
+                    
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <p>You have no orders yet.</p>
+            {% endif %}
+            </div>
+            
+            <div class="details-section">
+                <h3>Wishlist</h3>
+                <div id="cart-items-container">
+                    {% if cartitems and cartitems.items.exists %}
+                        {% for item in cartitems.items.all %}
+                        <div class="cart-item">
+                            <img src="{{ item.Product.Image.url }}" alt="{{ item.Product.Name }}">
+                            <div class="cart-item-details">
+                                <p class="cart-item-name">{{ item.Product.Name }}</p>
+                                <p class="cart-item-price" style="color:green;">${{ item.Product.Price }}</p>
+        
+                                <input type="number" class="cart-item-quantity" value="{{ item.Quantity }}" min="1">
+                                <div class="btns" style="display:flex;">
+                                    <form method="POST" action="{% url 'remove_item' item.ID %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="remove-item" >Remove</button>
+                                    </form>
+                                    <a href="{% url 'order' item.Product.ID %}">
+                                        <button class="buy-now">Buy Now</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="cart-item">
+                            <p>Your Cart is Empty</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h3>Address Details</h3>
+                {% for address in address %}
+                <div class="address">
+                    <span>{{ address.Name }}</span>
+                    <span>{{ address.Address_Line1 }}, {{ address.Address_Line2 }}</span>
+                    <span>{{ address.City }}, {{ address.State }} - {{ address.Pin_Code }}</span>
+                    <span>Ph: {{ address.contact_no }}</span>
+                </div>
+                {% endfor %}
+                <a href="{% url 'address' %}">
+                    <button type="button" id="add-address-btn">Add Address</button>
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}
+

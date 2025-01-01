@@ -1,0 +1,251 @@
+.product-view {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    width: 40%;
+    text-align: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.return-policy {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+.product-details {
+    width: 55%;
+    padding-left: 20px;
+}
+
+.product-details h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.product-details .category-name,
+.product-details .description {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.product-details .price-details {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.product-details .price-details .fixed-price {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.product-details .price-details .discount-price {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.product-actions button {
+    padding: 12px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.product-actions button:hover {
+    background-color: #45a049;
+}
+
+/* Feedback Section */
+.feedback-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.feedback-section h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.feedback {
+    margin:5px;
+    padding: 10px;
+    border: 2px solid rgba(93, 93, 93, 0.548);
+    border-radius: 5px;
+}
+.feedback div{
+    margin: 5px;
+    padding: 10px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    
+}
+
+.feedback p {
+    font-size: 16px;
+}
+
+.feedback-form {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.feedback-form button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.feedback-form button:hover {
+    background-color: #45a049;
+}
+.stars {
+    font-size: 20px;
+}
+/* Related Products Section */
+.related-products {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.related-products h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+.product-item {
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+.product-item a{
+    text-decoration: none;
+}
+
+.product-item img {
+    height: 200px;
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.product-item h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #d32f2f;
+}
+
+.product-item p {
+    font-size: 16px;
+    margin-top: 5px;
+}
+.priceinfo {
+    display: flex;
+    align-items: center; /* Align text vertically in the same line */
+    gap: 8px; /* Add space between elements */
+    font-family: Arial, sans-serif; /* Clean font */
+}
+
+.current-price {
+    font-size: 24px; /* Larger size for emphasis */
+    font-weight: bold; /* Highlight the current price */
+    color: #000; /* Black color for clarity */
+}
+
+.original-price {
+    font-size: 16px; /* Smaller size for the original price */
+    color: #888; /* Muted color for the original price */
+    text-decoration: line-through; /* Strike-through effect */
+}
+
+.discount {
+    font-size: 16px; /* Same size as the original price */
+    color: #2e7d32; /* Green color to emphasize the discount */
+    font-weight: bold; /* Highlight the discount */
+}
+  
+.buttons {
+    display: flex;
+    gap: 16px; /* Space between the buttons */
+    justify-content: center; /* Aligns buttons horizontally */
+    margin-top: 20px; /* Space above the button container */
+}
+  
+.buttons button {
+    padding: 10px 20px; /* Adds space inside the button */
+    font-size: 16px; /* Makes text size readable */
+    font-weight: bold; /* Highlights button text */
+    border: none; /* Removes default border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Adds smooth effects */
+}
+  
+.buttons button:nth-child(1) { /* Style for "ADD Cart" button */
+    background-color: #f8c146; /* Gold-like color */
+    color: #fff; /* White text */
+}
+  
+.buttons button:nth-child(1):hover {
+    background-color: #e5a835; /* Darker gold on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+  
+.buttons button:nth-child(2) { /* Style for "Buy Now" button */
+    background-color: #4caf50; /* Green color */
+    color: #fff; /* White text */
+}
+  
+.buttons button:nth-child(2):hover {
+    background-color: #3d8e41; /* Darker green on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

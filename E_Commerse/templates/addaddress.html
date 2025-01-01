@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/userstyle.css' %}"><!-- Link to your external CSS file -->
+    <style>
+        /* General container styling */
+        .container {
+            max-width: 600px;
+            margin: 0 auto; /* Center the container */
+            padding: 20px;
+            background-color: #f8f9fa; /* Light gray background */
+            border: 1px solid #dee2e6; /* Light border */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        
+        /* Header styling */
+        .container h2 {
+            color: #343a40; /* Dark gray */
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Input field styling */
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"],
+        form input[type="number"],
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da; /* Light border */
+            border-radius: 5px;
+            background-color: #fff; /* White background */
+            font-size: 14px;
+            color: #495057; /* Dark gray text */
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        /* Focused input fields */
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            border-color: #80bdff; /* Blue border on focus */
+            outline: none;
+            box-shadow: 0 0 4px rgba(0, 123, 255, 0.25); /* Subtle blue glow */
+        }
+        
+        /* Button styling */
+        form button {
+            width: 100%; /* Full width button */
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff; /* White text */
+            background-color: #007bff; /* Bootstrap primary blue */
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        
+        /* Button hover effect */
+        form button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-1px); /* Slight upward shift */
+        }
+        
+        /* Message list styling */
+        .container ul {
+            list-style: none; /* Remove bullet points */
+            padding: 0;
+        }
+        
+        .container ul li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        /* Alert styling */
+        .alert-info {
+            background-color: #d1ecf1; /* Light blue */
+            color: #0c5460; /* Darker blue text */
+            border: 1px solid #bee5eb; /* Slightly darker blue border */
+        }
+        
+        /* Label styling */
+        form label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #495057; /* Dark gray */
+        }
+        
+        
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Add Address</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Renders the form fields -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% if messages %}
+            <ul class="mt-3">
+                {% for message in messages %}
+                    <li class="alert alert-info">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}
+    

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} products {% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/productstyle.css' %}"> <!-- Link to your external CSS file -->
+{%endblock%}
+
+{% block content %}
+    <div class="container">
+        <!-- Directional Navigation -->
+        <div class="breadcrumb">
+            <a href="#home">Home</a> &gt; 
+            <a href="#category">Toys</a> &gt; 
+            <span>Action Figure 1</span>
+        </div>
+
+        <!-- Product Information Section -->
+        <div class="product-view">
+            <!-- Left Side: Product Image and Policy -->
+            <div class="product-image">
+                <img src="{{Product.Image.url}}" alt="Action Figure 1"> <!-- Product Image -->
+                <div class="return-policy">
+                    <h4>Return & Policy</h4>
+                    <p>30 days return policy for unused products.</p> <!-- Return Policy -->
+                </div>
+            </div>
+
+            <!-- Right Side: Product Details -->
+            <div class="product-details">
+                <h2>{{ Product.Name }}</h2> <!-- Product Name -->
+                <p class="category-name"><strong>{{ Product.Category }}</strong></p> <!-- Product Category -->
+                <p class="description">
+                    {{ Product.Description }}
+                </p> <!-- Product Description -->
+
+                <div class="price-details">
+                    <p class="fixed-price"><strong>Price:</strong> {{ Product.Price }} </p> <!-- Fixed Price -->
+                    <p class="discount-price"><strong>Discount Price:</strong>{{Product.Discount_Price}}</p> <!-- Discount Price -->
+                </div>
+
+                <!-- Buy Now and Add to Cart Buttons -->
+                <div class="product-actions">
+                    <a href="{% url 'order' Product.ID %}">
+                        <button class="buy-now">Buy Now</button>
+                    </a>
+                    <form action="{% url 'add_cart' Product.ID %}" method="POST">
+                        {% csrf_token %}
+                        <button class="add-to-cart">ADD Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Section -->
+        <section class="feedback-section">
+            <h3>Customer Feedback</h3>
+            {% for feedback in feedback %}
+                <div class="feedback">
+                    <p><strong>{{ feedback.name }}</strong></p> 
+                    <div>
+                        <p><span class="stars" data-rating="{{ feedback.rating }}"></span></p>
+                        <p class="desc">"{{ feedback.comment }}"</p>
+                    </div>
+                </div>
+            {% endfor %}
+            
+            <!-- Add Feedback Form -->
+            <div class="feedback-form">
+                <h4>Leave a Review</h4>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <h2>feedback</h2>
+                    {{feedBack_form.as_p}}
+                    <button type="submit" onclick=remove()>Submit Review</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Related Products Section -->
+        <section class="related-products">
+            <h3>Related Products</h3>
+            <div class="product-list">
+                {% for related_product in related_product %}
+                    <div class="product-item">
+                        <a href="{% url 'product' product_id=related_product.ID %}">
+                            <img src="{{related_product.Image.url}}" alt="Featured Toy 1">
+                            <h3>{{related_product.Name}}</h3>
+                            <div class="priceinfo">
+                                <span class="current-price">{{related_product.Discount_Price}}</span>
+                                <span class="original-price">{{related_product.Price}}</span>
+                                <span class="discount">82% off</span>
+                            </div>
+                            <div class="buttons">
+                                <form action="{% url 'add_cart' related_product.ID%}" method="POST">
+                                    {% csrf_token %}
+                                    <button>ADD Cart</button>
+                                </form>
+                                <button>Buy Now</button>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
